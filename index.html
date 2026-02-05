@@ -3,251 +3,51 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TVGram Tools</title>
+    <title>Mis Generadores TVGram</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #0f172a; /* Slate 900 */
-            color: #e2e8f0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            min-height: 100vh;
-            margin: 0;
-            user-select: none;
-        }
-        .glass-panel {
-            background: rgba(30, 41, 59, 0.7);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 16px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.5);
-        }
-        .input-field {
-            background-color: #1e293b;
-            border: 1px solid #334155;
-            color: white;
-            transition: all 0.3s ease;
-            user-select: text;
-        }
-        .input-field:focus {
-            outline: none;
-            border-color: #8b5cf6;
-            box-shadow: 0 0 0 2px rgba(139, 92, 246, 0.3);
-        }
-        .btn-primary {
-            background: linear-gradient(135deg, #7c3aed 0%, #6d28d9 100%);
-            transition: all 0.3s ease;
-        }
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(124, 58, 237, 0.4);
-        }
-        .tab-btn {
-            padding-bottom: 0.5rem;
-            color: #94a3b8;
-            border-bottom: 2px solid transparent;
-            transition: all 0.3s ease;
-        }
-        .tab-btn.active {
-            color: #a78bfa;
-            border-bottom-color: #a78bfa;
-            font-weight: bold;
-        }
-        .tab-btn:hover:not(.active) {
-            color: #e2e8f0;
-        }
-    </style>
+    <style>body{background-color:#0f172a;color:white;font-family:sans-serif}</style>
 </head>
-<body class="p-4 relative" oncontextmenu="return false">
-
-    <!-- Notificación Toast -->
-    <div id="toast" class="fixed top-5 left-1/2 transform -translate-x-1/2 px-6 py-4 rounded-lg shadow-2xl transition-all duration-300 opacity-0 -translate-y-8 pointer-events-none z-50 flex items-center space-x-3 font-medium bg-slate-800 border border-slate-600 text-white">
-        <i id="toast-icon" class="fas fa-info-circle text-blue-400"></i>
-        <span id="toast-message">Notificación</span>
+<body class="flex flex-col items-center justify-center min-h-screen p-4">
+    
+    <div class="text-center mb-10">
+        <h1 class="text-4xl font-bold text-purple-400 mb-2">Mis Herramientas</h1>
+        <p class="text-slate-400">Selecciona un generador</p>
     </div>
 
-    <!-- CONTENIDO DE LA APP -->
-    <div id="app-content" class="w-full max-w-lg space-y-6">
-        
-        <!-- Header -->
-        <div class="text-center space-y-2">
-            <div class="w-16 h-16 bg-purple-600 rounded-2xl mx-auto flex items-center justify-center shadow-lg shadow-purple-900/50 mb-4">
-                <i class="fas fa-magic text-2xl text-white ml-1"></i>
+    <div class="grid gap-4 w-full max-w-md">
+        <a href="gen1.html" class="bg-slate-800 hover:bg-purple-600 p-6 rounded-xl border border-slate-700 transition flex items-center shadow-lg">
+            <i class="fas fa-magic text-2xl mr-4 text-purple-400"></i>
+            <div>
+                <h3 class="font-bold text-lg">Generador 1</h3>
+                <p class="text-xs text-slate-400">Descripción corta aquí</p>
             </div>
-            <h1 class="text-3xl font-bold text-white">TVGram Tools</h1>
-            <p class="text-slate-400 text-sm">Generador de lanzadores.</p>
-        </div>
+        </a>
 
-        <!-- Panel Principal -->
-        <div class="glass-panel p-6 md:p-8">
-            
-            <!-- Navegación de Pestañas -->
-            <div class="flex space-x-6 mb-6 border-b border-slate-700">
-                <button onclick="switchTab('player')" id="tab-player" class="tab-btn active text-sm uppercase tracking-wide">
-                    <i class="fas fa-play-circle mr-1"></i> Reproductor
-                </button>
-                <button onclick="switchTab('channels')" id="tab-channels" class="tab-btn text-sm uppercase tracking-wide">
-                    <i class="fas fa-users mr-1"></i> Canales y Grupos
-                </button>
+        <a href="gen2.html" class="bg-slate-800 hover:bg-blue-600 p-6 rounded-xl border border-slate-700 transition flex items-center shadow-lg">
+            <i class="fas fa-play-circle text-2xl mr-4 text-blue-400"></i>
+            <div>
+                <h3 class="font-bold text-lg">Generador 2</h3>
+                <p class="text-xs text-slate-400">Descripción corta aquí</p>
             </div>
+        </a>
 
-            <!-- VISTA 1: REPRODUCTOR (Opción C - Default) -->
-            <div id="view-player" class="space-y-5">
-                <div>
-                    <label class="block text-sm font-bold mb-2 text-purple-300">
-                        <i class="fas fa-link mr-1"></i> Enlace del Vídeo (Opción C)
-                    </label>
-                    <input type="text" id="input_c_url" 
-                           placeholder="Pegar enlace (Bot, Catbox, Drive, M3U...)" 
-                           class="input-field w-full p-4 rounded-xl font-mono text-sm">
-                </div>
-
-                <div class="grid grid-cols-2 gap-4">
-                    <div>
-                        <label class="block text-sm font-bold mb-2 text-slate-300">
-                            <i class="fas fa-heading mr-1"></i> Título
-                        </label>
-                        <input type="text" id="input_c_title" 
-                               placeholder="Ej: La Película" 
-                               class="input-field w-full p-4 rounded-xl">
-                    </div>
-                    <div>
-                        <label class="block text-sm font-bold mb-2 text-orange-300">
-                            <i class="fas fa-hourglass-half mr-1"></i> Caducidad
-                        </label>
-                        <input type="number" id="input_c_hours" 
-                               placeholder="Horas (Opcional)" 
-                               class="input-field w-full p-4 rounded-xl" min="1">
-                    </div>
-                </div>
-                
-                <button onclick="downloadLauncher('C')" class="btn-primary w-full text-white font-bold py-4 rounded-xl flex items-center justify-center gap-3 text-lg mt-4">
-                    <i class="fas fa-file-download"></i> Descargar Lanzador
-                </button>
-                
-                <p class="text-xs text-center text-slate-500 mt-2">
-                    <i class="fas fa-shield-alt text-green-400"></i> Protegido + <i class="fas fa-bomb text-orange-400"></i> Autodestrucción opcional.
-                </p>
+        <a href="gen3.html" class="bg-slate-800 hover:bg-green-600 p-6 rounded-xl border border-slate-700 transition flex items-center shadow-lg">
+            <i class="fas fa-users text-2xl mr-4 text-green-400"></i>
+            <div>
+                <h3 class="font-bold text-lg">Generador 3</h3>
+                <p class="text-xs text-slate-400">Descripción corta aquí</p>
             </div>
+        </a>
 
-            <!-- VISTA 2: CANALES Y GRUPOS -->
-            <div id="view-channels" class="hidden space-y-8">
-                
-                <!-- Opción B: Join Group -->
-                <div class="space-y-3">
-                    <div class="flex items-center space-x-2 text-blue-400">
-                        <span class="bg-blue-500/20 px-2 py-0.5 rounded text-xs font-bold border border-blue-500/30">B</span>
-                        <h3 class="font-bold text-sm">Invitación a Grupo/Canal</h3>
-                    </div>
-                    <input type="text" id="input_b_url" placeholder="Enlace invitación (t.me/+AbCd...)" class="input-field w-full p-3 rounded-lg text-sm">
-                    <input type="text" id="input_b_title" placeholder="Nombre del Grupo" class="input-field w-full p-3 rounded-lg text-sm">
-                    <button onclick="downloadLauncher('B')" class="w-full bg-slate-700 hover:bg-slate-600 text-white font-bold py-2 rounded-lg text-sm transition border border-slate-600">
-                        <i class="fas fa-user-plus mr-1"></i> Crear Lanzador "Unirse"
-                    </button>
-                </div>
-
-                <div class="border-t border-slate-700"></div>
-
-                <!-- Opción A: Simple Open -->
-                <div class="space-y-3">
-                    <div class="flex items-center space-x-2 text-green-400">
-                        <span class="bg-green-500/20 px-2 py-0.5 rounded text-xs font-bold border border-green-500/30">A</span>
-                        <h3 class="font-bold text-sm">Abrir Canal Público</h3>
-                    </div>
-                    <input type="text" id="input_a_name" placeholder="Usuario (ej: durov)" class="input-field w-full p-3 rounded-lg text-sm">
-                    <button onclick="downloadLauncher('A')" class="w-full bg-slate-700 hover:bg-slate-600 text-white font-bold py-2 rounded-lg text-sm transition border border-slate-600">
-                        <i class="fas fa-external-link-alt mr-1"></i> Crear Lanzador "Abrir"
-                    </button>
-                </div>
+        <a href="gen4.html" class="bg-slate-800 hover:bg-orange-600 p-6 rounded-xl border border-slate-700 transition flex items-center shadow-lg">
+            <i class="fas fa-bolt text-2xl mr-4 text-orange-400"></i>
+            <div>
+                <h3 class="font-bold text-lg">Generador 4</h3>
+                <p class="text-xs text-slate-400">Descripción corta aquí</p>
             </div>
-
-        </div>
+        </a>
     </div>
 
-    <script>
-        // --- PROTECCIÓN CONTRA INSPECCIÓN ---
-        document.onkeydown = function(e) {
-            if(e.keyCode == 123) { return false; }
-            if(e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCodeAt(0)) { return false; }
-            if(e.ctrlKey && e.shiftKey && e.keyCode == 'C'.charCodeAt(0)) { return false; }
-            if(e.ctrlKey && e.shiftKey && e.keyCode == 'J'.charCodeAt(0)) { return false; }
-            if(e.ctrlKey && e.keyCode == 'U'.charCodeAt(0)) { return false; }
-        }
-
-        function showToast(m,t='success'){
-            const x=document.getElementById('toast'),y=document.getElementById('toast-message'),z=document.getElementById('toast-icon');
-            y.innerText=m;
-            x.className="fixed top-5 left-1/2 transform -translate-x-1/2 px-6 py-4 rounded-lg shadow-2xl transition-all duration-300 z-50 flex items-center space-x-3 font-medium border text-white opacity-100 translate-y-0";
-            if(t==='error'){x.classList.add('bg-red-900','border-red-700');z.className="fas fa-times-circle text-red-400"}
-            else{x.classList.add('bg-slate-800','border-slate-600');z.className="fas fa-check-circle text-green-400"}
-            if(window.tm)clearTimeout(window.tm);
-            window.tm=setTimeout(()=>{x.classList.remove('opacity-100','translate-y-0');x.classList.add('opacity-0','-translate-y-8')},3000)
-        }
-
-        function switchTab(n){
-            const p=document.getElementById('view-player'),c=document.getElementById('view-channels'),tp=document.getElementById('tab-player'),tc=document.getElementById('tab-channels');
-            if(n==='player'){p.classList.remove('hidden');c.classList.add('hidden');tp.classList.add('active');tc.classList.remove('active')}
-            else{p.classList.add('hidden');c.classList.remove('hidden');tp.classList.remove('active');tc.classList.add('active')}
-        }
-
-        function getDeepLink(t){
-            let l="",ti="TVGram";
-            if(t==='C'){
-                let u=document.getElementById('input_c_url').value.trim();
-                ti=document.getElementById('input_c_title').value.trim()||"Video";
-                if(!u)return null;
-                // Fix Drive Links
-                if(u.includes('drive.google.com')&&u.includes('/file/d/')){
-                    const m=u.match(/\/file\/d\/([a-zA-Z0-9_-]+)/);
-                    if(m&&m[1])u=`https://drive.google.com/uc?export=download&id=${m[1]}`
-                }
-                // Construcción pura sin referer
-                l=`tvgram://play?url=${encodeURIComponent(u)}&title=${encodeURIComponent(ti)}`
-            } else if(t==='B'){
-                const u=document.getElementById('input_b_url').value.trim();
-                ti=document.getElementById('input_b_title').value.trim()||"Grupo";
-                if(!u)return null;
-                l=`tvgram://join?url=${encodeURIComponent(u)}&title=${encodeURIComponent(ti)}`
-            } else if(t==='A'){
-                let i=document.getElementById('input_a_name').value.trim();
-                ti=i||"Canal";
-                if(!i)return null;
-                i=i.replace('https://t.me/','').replace('http://t.me/','').replace('@','');
-                l=`tvgram://t.me/${i}`
-            }
-            return {link:l,title:ti};
-        }
-
-        function downloadLauncher(t){
-            const d=getDeepLink(t);
-            if(!d){showToast("Rellena el campo.","error");return}
-            const s=d.title.replace(/[^a-z0-9]/gi,'_').toLowerCase(),e=btoa(d.link);
-            
-            // Lógica de caducidad en el script generado
-            let ex="";
-            if(t==='C'){
-                const h=document.getElementById('input_c_hours').value;
-                if(h&&h>0){
-                    const n=new Date().getTime(),xt=n+(h*60*60*1000);
-                    ex=`var x=${xt},n=new Date().getTime();if(n>x){document.body.innerHTML='<div style="background:#1f2937;color:white;padding:20px;border-radius:10px;font-family:sans-serif;text-align:center;"><h2>⛔ ENLACE CADUCADO</h2></div>';return}`
-                }
-            }
-
-            // HTML Generado (Minificado)
-            const h=`<!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>${d.title}</title><style>body{font-family:sans-serif;background:#0f172a;color:white;display:flex;flex-direction:column;align-items:center;justify-content:center;height:100vh;margin:0;text-align:center}.btn{cursor:pointer;background:#7c3aed;color:white;padding:20px 40px;font-size:20px;text-decoration:none;border-radius:50px;font-weight:bold;margin-top:20px;display:inline-block;box-shadow:0 4px 15px rgba(124,58,237,0.4);transition:transform .2s;border:none}.btn:active{transform:scale(.95)}.l{border:4px solid #f3f3f3;border-top:4px solid #7c3aed;border-radius:50%;width:40px;height:40px;animation:s 1s linear infinite;margin-bottom:20px}@keyframes s{0%{transform:rotate(0deg)}100%{transform:rotate(360deg)}}</style></head><body><div class="l"></div><h2>TVGram...</h2><p style="opacity:.7">File: <strong>${d.title}</strong></p><button onclick="g()" class="btn">🚀 PLAY</button><script>var z="${e}";function g(){${ex}try{window.location.href=atob(z)}catch(e){}}setTimeout(g,500)<\/script></body></html>`;
-            
-            const b=new Blob([h],{type:'text/html'}),u=URL.createObjectURL(b),a=document.createElement('a');
-            a.href=u;
-            a.download=`OPEN_${s.toUpperCase()}.html`;
-            document.body.appendChild(a);
-            a.click();
-            document.body.removeChild(a);
-            URL.revokeObjectURL(u);
-            showToast("¡Generado!");
-        }
-    </script>
 </body>
 </html>
